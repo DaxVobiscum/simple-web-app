@@ -5,13 +5,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Hello, World!</title>
+	<script>
+		Window.REQUEST = Window.REQUEST || {};
+		
+		Window.REQUEST.name = "${name}";
+	</script>
 </head>
 <body>
-	<div>
-		<p>Hello, ${name}!</p>
-	</div>
-	<div id="react">
-	</div>
+	<div id="react"></div>
 	<script type="application/javascript" src="app/app.js"></script>
 </body>
 </html>

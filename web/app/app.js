@@ -514,7 +514,10 @@ var Application = function (_React$Component) {
 	function Application() {
 		_classCallCheck(this, Application);
 
-		return _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
+		var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
+
+		_this.name = Window.REQUEST.name;
+		return _this;
 	}
 
 	_createClass(Application, [{
@@ -527,7 +530,9 @@ var Application = function (_React$Component) {
 			return React.createElement(
 				"h1",
 				null,
-				"Hello, REACT.JS!"
+				"Hello, ",
+				this.name,
+				"!"
 			);
 		}
 	}]);

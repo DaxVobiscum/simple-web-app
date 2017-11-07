@@ -2,10 +2,12 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 
 class Application extends React.Component {
-	
+    
 	constructor() {
 		
 		super();
+		
+		this.name = Window.REQUEST.name;
 	}
 	
 	componentDidMount() {
@@ -15,7 +17,7 @@ class Application extends React.Component {
 	
 	render() {
 		
-		return <h1>Hello, THING!</h1>
+		return <h1>Hello, {this.name}!</h1>
 	}
 }
 
