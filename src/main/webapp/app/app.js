@@ -509,35 +509,86 @@ var React = __webpack_require__(5);
 var ReactDOM = __webpack_require__(11);
 
 var Application = function (_React$Component) {
-	_inherits(Application, _React$Component);
+				_inherits(Application, _React$Component);
 
-	function Application() {
-		_classCallCheck(this, Application);
+				function Application() {
+								_classCallCheck(this, Application);
 
-		var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
+								var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
 
-		_this.name = Window.REQUEST.name;
-		return _this;
-	}
+								_this.name = Window.REQUEST.name;
+								_this.appBase = Window.REQUEST.appBase;
+								return _this;
+				}
 
-	_createClass(Application, [{
-		key: "componentDidMount",
-		value: function componentDidMount() {}
-	}, {
-		key: "render",
-		value: function render() {
+				_createClass(Application, [{
+								key: "componentDidMount",
+								value: function componentDidMount() {}
+				}, {
+								key: "render",
+								value: function render() {
 
-			return React.createElement(
-				"h1",
-				null,
-				"Hello, ",
-				this.name,
-				"!"
-			);
-		}
-	}]);
+												return React.createElement(
+																"div",
+																null,
+																React.createElement(Hello, { name: this.name }),
+																React.createElement(AppBase, { appBase: this.appBase })
+												);
+								}
+				}]);
 
-	return Application;
+				return Application;
+}(React.Component);
+
+var Hello = function (_React$Component2) {
+				_inherits(Hello, _React$Component2);
+
+				function Hello(props) {
+								_classCallCheck(this, Hello);
+
+								return _possibleConstructorReturn(this, (Hello.__proto__ || Object.getPrototypeOf(Hello)).call(this, props));
+				}
+
+				_createClass(Hello, [{
+								key: "render",
+								value: function render() {
+
+												return React.createElement(
+																"div",
+																null,
+																"Salut, ",
+																this.props.name,
+																"!"
+												);
+								}
+				}]);
+
+				return Hello;
+}(React.Component);
+
+var AppBase = function (_React$Component3) {
+				_inherits(AppBase, _React$Component3);
+
+				function AppBase(props) {
+								_classCallCheck(this, AppBase);
+
+								return _possibleConstructorReturn(this, (AppBase.__proto__ || Object.getPrototypeOf(AppBase)).call(this, props));
+				}
+
+				_createClass(AppBase, [{
+								key: "render",
+								value: function render() {
+
+												return React.createElement(
+																"div",
+																null,
+																"App Base: ",
+																this.props.appBase
+												);
+								}
+				}]);
+
+				return AppBase;
 }(React.Component);
 
 ReactDOM.render(React.createElement(Application, null), document.getElementById("react"));

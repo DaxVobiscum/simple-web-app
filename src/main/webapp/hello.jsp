@@ -9,6 +9,7 @@
 		Window.REQUEST = Window.REQUEST || {};
 		
 		Window.REQUEST.name = "${name}";
+		Window.REQUEST.appPath = "${appPath}";
 	</script>
 </head>
 <body>

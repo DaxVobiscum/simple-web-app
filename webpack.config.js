@@ -1,7 +1,7 @@
 var webpack = require("webpack");
 
 module.exports = {
-	entry: "./src/app/index.jsx",
+	entry: "./src/main/js/index.jsx",
 	target: "node",
 	output: {
 		filename: "app.js"
