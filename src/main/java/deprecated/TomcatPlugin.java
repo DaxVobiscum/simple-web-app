@@ -1,4 +1,4 @@
-package com.polonius.web;
+package deprecated;
 
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;

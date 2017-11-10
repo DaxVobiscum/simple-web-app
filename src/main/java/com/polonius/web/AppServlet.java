@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,14 +13,13 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class HelloWorld
  */
-@WebServlet("/Hello")
-public class HelloWorld extends HttpServlet {
+public class AppServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HelloWorld() {
+    public AppServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,7 +48,16 @@ public class HelloWorld extends HttpServlet {
 		String appPath = this.getServletContext().getRealPath(File.separator);
 		request.setAttribute("appPath", appPath);
 		
-		request.getRequestDispatcher("/hello.jsp").forward(request, response);
+		String requestPath = request.getPathInfo();
+		
+		if ("".equals(requestPath)) {
+			
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+		}
+		else if (null != requestPath) {
+			
+			request.getRequestDispatcher(requestPath).forward(request, response);
+		}
 	}
 
 	/**

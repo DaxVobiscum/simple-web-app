@@ -1,83 +1,56 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
+import React, { Component } from "react";
+import { render } from "react-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
-class Application extends React.Component {
-    
-	constructor() {
-		
-		super();
-		
-		this.name = Window.REQUEST.name;
-		this.appPath = Window.REQUEST.appPath;
-	}
-	
-	componentDidMount() {
-		
-		
-	}
-	
-	render() {
-		
-		return (
-	        <div>
-		        <AppPath appPath={this.appPath} />
-		        <br />
-		        {
-		            this.name !== "" ? 
-	                    <Hello name={this.name} /> :
-                        <InfoForm />
-		        }
-	        </div>
-        )
-	}
-}
+import Home from "./common/home.component.jsx";
+import About from "./common/about.component.jsx";
 
-class Hello extends React.Component {
-    
-    constructor(props) {
-        
-        super(props);
+const endpoints = [
+    {
+        text: "Home",
+        path: "",
+        component: Home
+    },
+    {
+        text: "About",
+        path: "About",
+        component: About
     }
-    
-    render() {
-        
-        return <div>Welcome back, {this.props.name}!</div>
-    }
-}
+];
 
-class AppPath extends React.Component {
+class MainView extends Component {
     
-    constructor(props) {
+    constructor() {
         
-        super(props);
-    }
-    
-    render() {
+        super();
         
-        return <div>App Path: {this.props.appPath}</div>
-    }
-}
-
-class InfoForm extends React.Component {
-    
-    constructor(props) {
+        this.links = endpoints.map((endpoint, index) => 
+           <Link key={ "link-" + index } to={endpoint.path}>{endpoint.text}</Link> 
+        );
         
-        super(props);
+        this.routes = endpoints.map((endpoint, index) => 
+           <Route key={ "route-" + index } path={endpoint.path} component={endpoint.component} /> 
+        );
     }
     
     render() {
         
         return (
-            <form action="SaveInfo" method="GET">
-                <input type="text" placeholder="Your name here" name="userName" />
-                <br />
-                <button type="submit">Submit</button>
-            </form>
+            <div>
+                <Router>
+                    <div>
+                        {this.links}
+                        <Switch>
+                            {this.routes}
+                        </Switch>
+                    </div>
+                </Router>
+            </div>
         );
     }
 }
 
-ReactDOM.render(
-	<Application />,
+render(
+	<MainView />,
 	document.getElementById("react")
 );

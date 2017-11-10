@@ -20,7 +20,7 @@ gulp.task("js-update", [ "js" ], () => {
 		.pipe(gulp.dest(path.resolve(__dirname, "src", "main", "webapp", "app")));
 });
 
-gulp.task("jsdev", [ "js-update" ], () => {
+gulp.task("js-dev", [ "js-update" ], () => {
 	
 	gulp.watch(jsSrcGlob, { interval: 500 }, [ "js-update" ]);
 });
@@ -44,7 +44,7 @@ gulp.task("tc-update", [ "js" ], () => {
 	}
 })
 
-gulp.task("tcdev", [ "tc-update" ], () => {
+gulp.task("tc-dev", [ "tc-update" ], () => {
 	
 	gulp.watch(jsSrcGlob, { interval: 500 }, [ "tc-update" ]);
 });
