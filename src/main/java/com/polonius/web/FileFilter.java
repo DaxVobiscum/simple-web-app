@@ -55,6 +55,10 @@ public class FileFilter implements Filter {
 			// pass the request along the filter chain
 			chain.doFilter(request, response);
 		}
+		else if ("/saveInfo".equals(resourcePath)) {
+			
+			request.getRequestDispatcher("/saveInfo").forward(request, response);
+		}
 		else {
 			
 			// forward to AppServlet and index.jsp

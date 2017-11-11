@@ -1,74 +1,41 @@
 import React, { Component } from "react";
+import { Card, CardTitle } from "material-ui/Card";
+import PropTypes from "prop-types";
 
-class Hello extends Component {
+class Home extends Component {
     
     constructor(props) {
         
         super(props);
-    }
-    
-    render() {
         
-        return <div>Welcome back, {this.props.name}!</div>
-    }
-}
-
-class AppPath extends Component {
-    
-    constructor(props) {
-        
-        super(props);
-    }
-    
-    render() {
-        
-        return <div>App Path: {this.props.appPath}</div>
-    }
-}
-
-class InfoForm extends Component {
-    
-    constructor(props) {
-        
-        super(props);
+        this.name = Window.REQUEST.name || "";
+        this.appPath = Window.REQUEST.appPath || "";
     }
     
     render() {
         
         return (
-            <form action="SaveInfo" method="GET">
-                <input type="text" placeholder="Your name here" name="userName" />
-                <br />
-                <button type="submit">Submit</button>
-            </form>
+            <Card className="container">
+                <CardTitle title="simple-web-app" subtitle="This is the home page." />
+                {
+                    (0 < this.name.length) ?  
+                        <div>
+                            <br />
+                            <div>Welcome back, {this.name}!</div>
+                        </div>
+                        : <div>You are not signed in.</div> 
+                }
+                {
+                    (0 < this.appPath.length) ? 
+                        <div>
+                            <br />
+                            <div>App Path: {this.appPath}</div>
+                        </div>
+                        : <div>App path not available.</div>
+                }
+            </Card>
         );
     }
-}
+};
 
-export default class Home extends React.Component {
-  
-    constructor(props) {
-        
-        super(props);
-        
-        this.name = Window.REQUEST.name;
-        this.appPath = Window.REQUEST.appPath;
-    }
-    
-    render() {
-        
-        return (
-            <div>
-                <div>Home Page</div>
-                <br />
-                <AppPath appPath={this.appPath} />
-                <br />
-                {
-                    this.name !== "" ? 
-                        <Hello name={this.name} /> :
-                        <InfoForm />
-                }
-            </div>
-        )
-    }
-}
+export default Home;

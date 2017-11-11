@@ -1,20 +1,34 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
-import Home from "./common/home.component.jsx";
-import About from "./common/about.component.jsx";
+import { default as HomePage} from "./common/home.component.jsx";
+import { default as AboutPage } from "./common/about.component.jsx";
+
+import SignUpPage from "./auth/signup.component.jsx";
+import LoginPage from "./auth/login.component.jsx";
 
 const endpoints = [
     {
         text: "Home",
         path: "/",
-        component: Home
+        component: HomePage
     },
     {
         text: "About",
-        path: "/About",
-        component: About
+        path: "/about",
+        component: AboutPage
+    },
+    {
+        text: "Sign Up",
+        path: "/sign-up",
+        component: SignUpPage
+    },
+    {
+        text: "Login",
+        path: "/login",
+        component: LoginPage,
     }
 ];
 
@@ -25,7 +39,9 @@ class MainView extends Component {
         super();
         
         this.links = endpoints.map((endpoint, index) => 
-           <Link key={ "link-" + index } to={endpoint.path}>{endpoint.text}</Link> 
+           <li key={ "link-" + index }>
+                <Link to={endpoint.path}>{endpoint.text}</Link>
+           </li>
         );
         
         this.routes = endpoints.map((endpoint, index) => 
@@ -36,16 +52,18 @@ class MainView extends Component {
     render() {
         
         return (
-            <div>
+            <MuiThemeProvider>
                 <Router basename="/simple-web-app/">
                     <div>
-                        {this.links}
+                        <ul>
+                            {this.links}
+                        </ul>
                         <Switch>
                             {this.routes}
                         </Switch>
                     </div>
                 </Router>
-            </div>
+            </MuiThemeProvider>
         );
     }
 }

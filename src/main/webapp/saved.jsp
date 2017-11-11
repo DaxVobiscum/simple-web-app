@@ -11,7 +11,7 @@
 		<div>
 			<span>Thanks for submitting, ${userName}!</span>
 		</div>
-		<form action="Hello" method="GET">
+		<form action="/simple-web-app/" method="GET">
 			<button type="submit">Return to Home</button>
 		</form>
 	</div>
