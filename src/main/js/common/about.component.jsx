@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 
 export default class About extends Component {
 	
@@ -16,7 +16,7 @@ export default class About extends Component {
 		return (
 			<div>
 				<div>Author: { this.author }</div>
-				<div>Repository: <Link to={ this.repo } /></div>
+				<div>Repository: <Link to={ this.repo }>{this.repo}</Link></div>
 			</div>
 		);
 	}

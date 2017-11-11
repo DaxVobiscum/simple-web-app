@@ -5,7 +5,7 @@ var webpack = require("webpack-stream");
 
 var appConfig = require("./.appconfig");
 
-var jsSrcGlob = "src/main/js/*.*(js|jsx)";
+var jsSrcGlob = "src/main/js/**/*.*(js|jsx)";
 
 gulp.task("js", () => {
 	

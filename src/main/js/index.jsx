@@ -8,12 +8,12 @@ import About from "./common/about.component.jsx";
 const endpoints = [
     {
         text: "Home",
-        path: "",
+        path: "/",
         component: Home
     },
     {
         text: "About",
-        path: "About",
+        path: "/About",
         component: About
     }
 ];
@@ -29,7 +29,7 @@ class MainView extends Component {
         );
         
         this.routes = endpoints.map((endpoint, index) => 
-           <Route key={ "route-" + index } path={endpoint.path} component={endpoint.component} /> 
+           <Route key={ "route-" + index } exact path={endpoint.path} component={endpoint.component} /> 
         );
     }
     
@@ -37,7 +37,7 @@ class MainView extends Component {
         
         return (
             <div>
-                <Router>
+                <Router basename="/simple-web-app/">
                     <div>
                         {this.links}
                         <Switch>
