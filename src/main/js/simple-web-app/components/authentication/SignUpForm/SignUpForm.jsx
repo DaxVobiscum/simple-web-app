@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Card, CardText } from "material-ui/Card";
-import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Card, CardText } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types';
 
-const SignUpForm = ({
+function SignUpForm ({
     onSubmit,
     onChange,
     errors,
     user
-}) => {
+}) {
   
     return (
         <Card className="container">
@@ -54,7 +54,7 @@ const SignUpForm = ({
                     <RaisedButton type="submit" label="Create New Account" primary />
                 </div>
                 
-                <CardText>Already have an account? <Link to={"/login"}>Log in</Link></CardText>
+                <CardText>Already have an account? <Link to={'/login'}>Log in</Link></CardText>
             </form>
         </Card>
     );
@@ -65,48 +65,6 @@ SignUpForm.propTypes = {
     onChange: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired
-};
+};      
 
-class SignUpPage extends Component {
-    
-    constructor(props) {
-        
-        super(props);
-
-        this.errors = {
-            name: "Invalid user name.",
-            email: "Invalid e-mail.",
-            password: "Invalid password."
-        };
-        
-        this.user = {
-            name: "",
-            email: "",
-            password: ""
-        };
-    }
-    
-    onSubmit(e) {
-        
-        console.log("Submitted sign up form.");
-    }
-    
-    onChange (e) {
-        
-        console.log("Sign up form changed.");
-    }
-    
-    render() {
-      
-      return (
-          <SignUpForm
-              onSubmit={this.onSubmit}
-              onChange={this.onChange}
-              errors={this.errors}
-              user={this.user}
-          />
-      );
-    }
-}
-
-export default SignUpPage;
+export default SignUpForm;
