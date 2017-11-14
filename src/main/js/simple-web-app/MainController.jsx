@@ -1,14 +1,9 @@
 import React from 'react';
 
-import {LoginForm, SignUpForm, ErrorBoundary} from './components';
-import {RouteController} from './routes';
-import {TestComponent} from './test';
+import { ErrorBoundary } from './components';
+import { RouteController } from './routes';
 
-const components = {
-    LoginForm,
-    SignUpForm,
-    TestComponent
-};
+import { components } from './constants';
 
 function MainController() {
     

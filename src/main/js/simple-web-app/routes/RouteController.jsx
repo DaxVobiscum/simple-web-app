@@ -1,49 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import {HomePage} from './HomePage';
-import {AboutPage} from './AboutPage';
-import {SignUpPage} from './SignUpPage';
-import {LoginPage} from './LoginPage';
+import { endpoints } from './constants';
 
 var shortid = require('shortid');
 var _ = require('underscore');
-
-const endpoints = [
-    {
-        text: 'Home',
-        path: '/',
-        component: HomePage,
-        props: {
-            'exact': true
-        },
-        requires: [
-           'TestComponent'
-        ]
-    },
-    {
-        text: 'About',
-        path: '/about',
-        component: AboutPage
-    },
-    {
-        text: 'Sign Up',
-        path: '/sign-up',
-        component: SignUpPage,
-        requires: [
-           'SignUpForm'
-        ]
-    },
-    {
-        text: 'Login',
-        path: '/login',
-        component: LoginPage,
-        requires: [
-           'LoginForm'
-        ]
-    }
-];
 
 const links = endpoints.map((endpoint, index) => 
     <li key={shortid.generate()}>
@@ -79,7 +41,7 @@ class RouteController extends React.Component {
                 var routeComponent = (0 < _.keys(filteredComponents).length) ? 
                     <Component requires={filteredComponents} /> : <Component />;
                 
-                var renderFunc = (routeComponent => routeProps => routeComponent)(routeComponent);
+                var renderFunc = routeProps => routeComponent;
                 
                 routes.push(<Route key={routeKey} {...endpoint.props} path={endpoint.path} render={renderFunc} />);
             }
