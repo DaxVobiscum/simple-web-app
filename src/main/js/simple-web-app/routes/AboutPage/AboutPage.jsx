@@ -4,12 +4,37 @@ import { Link } from 'react-router-dom';
 const author = 'PoorPolonius';
 const repository = 'https://github.com/PoorPolonius/simple-web-app.git';
 
-export default function AboutPage () {
+class AboutPage extends React.Component {
 	
-	return (
-		<div>
-			<div>Author: {author}</div>
-			<div>Repository: <Link to={repository}>{repository}</Link></div>
-		</div>
-	);
-};
+    constructor(props) {
+        
+        super(props);
+    }
+    
+	render() {
+	    
+	    var TestComponent = null;
+	    
+	    if (this.props.requires) {
+	        
+	        TestComponent = this.props.requires['TestComponent'];
+	    }
+	    
+	    return (
+    		<div>
+    			<div>Author: {author}</div>
+    			<div>Repository: <Link to={repository}>{repository}</Link></div>
+    			{
+    			    (TestComponent) ? 
+    			        <TestComponent 
+    			            paramA={<div>Test Param A</div>}
+    			            paramB={() => alert('Test Param B!')}
+    			        />
+		        		: null
+        		}
+    		</div>
+		);
+	}
+}
+
+export default AboutPage

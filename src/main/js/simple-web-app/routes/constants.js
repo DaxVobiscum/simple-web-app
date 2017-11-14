@@ -18,7 +18,10 @@ export const endpoints = [
     {
         text: 'About',
         path: '/about',
-        component: AboutPage
+        component: AboutPage,
+        requires: [
+        	'TestComponent'
+        ]
     },
     {
         text: 'Sign Up',
