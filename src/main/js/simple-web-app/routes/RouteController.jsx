@@ -1,15 +1,26 @@
 import React from 'react';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import {HomePage, AboutPage, SignUpPage, LoginPage} from './common/index.jsx';
+import {HomePage} from './HomePage';
+import {AboutPage} from './AboutPage';
+import {SignUpPage} from './SignUpPage';
+import {LoginPage} from './LoginPage';
 
-import shortid from 'shortid';
+var shortid = require('shortid');
+var _ = require('underscore');
 
 const endpoints = [
     {
         text: 'Home',
         path: '/',
-        component: HomePage
+        component: HomePage,
+        props: {
+            'exact': true
+        },
+        requires: [
+           'TestComponent'
+        ]
     },
     {
         text: 'About',
@@ -19,12 +30,18 @@ const endpoints = [
     {
         text: 'Sign Up',
         path: '/sign-up',
-        component: SignUpPage
+        component: SignUpPage,
+        requires: [
+           'SignUpForm'
+        ]
     },
     {
         text: 'Login',
         path: '/login',
         component: LoginPage,
+        requires: [
+           'LoginForm'
+        ]
     }
 ];
 
@@ -34,29 +51,63 @@ const links = endpoints.map((endpoint, index) =>
     </li>
 );
 
-const routes = endpoints.map((endpoint, index) => 
-    <Route key={shortid.generate()} path={endpoint.path} component={endpoint.component} /> 
-);
-
-
 class RouteController extends React.Component {
     
     constructor(props) {
+        
         super(props);
     }
     
+    generateRoutes() {
+        
+        var routes = [ ];
+        
+        var ctrl = this;
+        
+        _.each(endpoints, endpoint => {
+            
+            var routeKey = shortid.generate();
+            
+            if (endpoint.requires && 0 < endpoint.requires.length) {
+                
+                var availableComponents = ctrl.props.components;
+                
+                var Component = endpoint.component;
+                
+                var filteredComponents = _.pick(availableComponents, ...endpoint.requires);
+                
+                var routeComponent = (0 < _.keys(filteredComponents).length) ? 
+                    <Component requires={filteredComponents} /> : <Component />;
+                
+                var renderFunc = (routeComponent => routeProps => routeComponent)(routeComponent);
+                
+                routes.push(<Route key={routeKey} {...endpoint.props} path={endpoint.path} render={renderFunc} />);
+            }
+            else {
+                
+                routes.push(<Route key={routeKey} {...endpoint.props} path={endpoint.path} component={endpoint.component} />);
+            }
+        });
+        
+        return routes;
+    }
+    
     render() {
-        <Router basename="/simple-web-app/">
-            <div>
-                <ul>
-                    {links}
-                </ul>
-                <ErrorBoundary>
-                    <Switch>
-                        {routes}
-                    </Switch>
-                </ErrorBoundary>
-            </div>
-        </Router>
+        return (
+            <MuiThemeProvider>
+                <Router basename="/simple-web-app/">
+                    <div>
+                        <ul>
+                            {links}
+                        </ul>
+                        <Switch>
+                            {this.generateRoutes()}
+                        </Switch>
+                    </div>
+                </Router>
+            </MuiThemeProvider>
+        );
     }
 }
+
+export default RouteController;

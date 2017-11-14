@@ -1,1 +1,1 @@
-export {AboutPage} from './AboutPage';
+export { default as SignUpPage } from './SignUpPage.jsx';

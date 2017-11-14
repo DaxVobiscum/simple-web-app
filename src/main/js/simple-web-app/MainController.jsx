@@ -1,18 +1,21 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import {LoginForm, SignUpForm} from './components/authentication';
+import {LoginForm, SignUpForm, ErrorBoundary} from './components';
 import {RouteController} from './routes';
-import {ErrorBoundary} from './errors';
+import {TestComponent} from './test';
+
+const components = {
+    LoginForm,
+    SignUpForm,
+    TestComponent
+};
 
 function MainController() {
     
     return (
-        <MuiThemeProvider>
-            <ErrorBoundary>
-                <RouteController />
-            </ErrorBoundary>
-        </MuiThemeProvider>
+        <ErrorBoundary>
+            <RouteController components={components} />
+        </ErrorBoundary>
     );
 }
 

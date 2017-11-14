@@ -1,11 +1,31 @@
 import React from 'react';
-import LoginForm from './../auth/LoginForm.jsx';
 
-export default function LoginPage () {
+class LoginPage extends React.Component {
   
-    return (
-        <LoginForm
-            onSubmit={(e) => console.log('Login form submitted.')}
-        />
-    );
-};
+    
+    constructor(props) {
+        
+        super(props);
+    }
+    
+    render() {
+        
+        if (this.props.requires) {
+            
+            var LoginForm = this.props.requires['LoginForm'];
+            
+            if (LoginForm) {
+                
+                return (
+                    <LoginForm
+                        onSubmit={(e) => console.log('Login form submitted.')}
+                    />
+                ); 
+            }
+        }
+        
+        return <div>Error: Failed to load login form component.</div>;
+    }
+}
+
+export default LoginPage;
