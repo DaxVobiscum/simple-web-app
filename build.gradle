@@ -1,0 +1,16 @@
+def WAR_NAME = 'simple-web-app'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+description = 'A simple web app using JSP and React.'
+version = '0.1.0-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	providedCompile "org.apache.tomcat:tomcat-catalina:7.0.81"
+	providedCompile "javax:javaee-api:8.0"
+}
